@@ -1,0 +1,19 @@
+defaults: &defaults
+  host: localhost
+  database: <%= "foodtruckr_#{Rails.env}" %>
+  # slaves:
+  #   - host: slave1.local
+  #     port: 27018
+
+development:
+  <<: *defaults
+
+test:
+  <<: *defaults
+
+# set these environment variables on your prod server
+production:
+  uri: <%= ENV['MONGOHQ_URL'] %> 
+  
+staging:
+  uri: <%= ENV['MONGOHQ_URL'] %>

@@ -1,0 +1,24 @@
+<table>
+  <thead>
+    <tr>
+      <th>From</th>
+      <th>Time</th>
+      <th>Text</th>
+      <th>Coordinates</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @tweets.each do |tweet| %>
+      <tr>
+        <td><%= tweet.user['name'] %></td>
+        <td><%= tweet.created_at.to_time.strftime("%m/%d %I:%M%p") %></td>
+        <td><%= Foodtruckr::StringLocator.highlight_location(tweet.pretty_text).html_safe %></td>
+        <td>
+          <% if !tweet.coordinates.nil? %>
+            <%= link_to tweet.coordinates_str, tweet.coordinates_url %>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>  

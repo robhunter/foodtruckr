@@ -1,0 +1,6 @@
+GetTweets:
+  queue: "main"
+  class: GetTweets
+  args:
+  cron: "0 * * * *"
+  description: "Calculates buzzes across all accounts"
