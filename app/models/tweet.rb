@@ -1,6 +1,8 @@
 class Tweet
   include Mongoid::Document
   
+  belongs_to :tweeter
+  
   field :name                     , type: String
   field :retweeted                , type: String
   field :in_reply_to_screen_name  , type: String

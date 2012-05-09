@@ -8,11 +8,18 @@ module Foodtruckr
         result[element.id_str] = element
         result
       end
+      tweeters = Tweeter.all.entries.inject({}) do |result, element|
+        result[element.screen_name] = element
+        result
+      end
       page_count.times do |i|
         puts "Twitter.list_timeline('robhunter', 'food-trucks', :page=>#{i+1}, :per_page => 100)"
         Twitter.list_timeline('robhunter', 'food-trucks', :page=>(i+1), :per_page => 100).each do |tweet|
           if tweets[tweet.attrs['id_str']].nil?
             t = Tweet.create(tweet.attrs)
+            if !tweeters[t.user['screen_name']].nil?
+              tweeters[t.user['screen_name']].tweets << t
+            end
           end
         end
       end
